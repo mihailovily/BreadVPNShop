@@ -10,7 +10,6 @@ ACCESS_PASSWORD = os.getenv("ACCESS_PASSWORD")
 USERS_FILE = os.getenv("USERS_FILE")
 
 bot = telebot.TeleBot(TOKEN)
-users = load_users()
 
 def load_users():
     if os.path.exists(USERS_FILE):
@@ -21,6 +20,8 @@ def load_users():
 def save_users():
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, ensure_ascii=False, indent=2)
+
+users = load_users()
 
 def main_keyboard():
     kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -145,5 +146,6 @@ def remind_payment_send(msg):
         bot.send_message(ADMIN_ID, f"✅ Напоминание отправлено @{username}.")
     else:
         bot.send_message(ADMIN_ID, "❌ Пользователь не найден.")
+
 
 bot.polling(none_stop=True)

@@ -21,3 +21,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 pytelegrambotapi = "^4.29.1"
+dotenv = "^0.9.9"
