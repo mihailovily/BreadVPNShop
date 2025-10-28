@@ -2,13 +2,15 @@ import telebot
 from telebot import types
 import json
 import os
+from dotenv import load_dotenv
 
-TOKEN = open("creds/TOKEN.txt", "r").read().strip()
-ADMIN_ID = open("creds/ADMIN_ID.txt", "r").read().strip()
-ACCESS_PASSWORD = open("creds/PASSWORD.txt", "r").read().strip()
-USERS_FILE = "users.json"
+TOKEN = os.getenv("TOKEN")
+ADMIN_ID = os.getenv("ADMIN_ID")
+ACCESS_PASSWORD = os.getenv("ACCESS_PASSWORD")
+USERS_FILE = os.getenv("USERS_FILE")
 
 bot = telebot.TeleBot(TOKEN)
+users = load_users()
 
 def load_users():
     if os.path.exists(USERS_FILE):
@@ -19,8 +21,6 @@ def load_users():
 def save_users():
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, ensure_ascii=False, indent=2)
-
-users = load_users()
 
 def main_keyboard():
     kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
