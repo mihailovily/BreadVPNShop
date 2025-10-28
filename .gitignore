@@ -1,4 +1,3 @@
-
-tokens/
+creds/
 test.py
-keys/
+users.json
